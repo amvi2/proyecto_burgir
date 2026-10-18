@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2D0554" />
+  <title>BURGIR BURGIR | Hamburguesas Arcade</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="crt" aria-hidden="true"></div>
+
+  <div class="hud" role="status">
+    <div><b>1UP</b> <span id="hud-jugador" class="parpadeo">INSERT COIN</span></div>
+    <div><b>CARRITO</b> <span id="hud-total">Q0.00</span></div>
+    <div><b>HI-SCORE</b> <span>999999</span></div>
+  </div>
+
+  <header class="cabecera">
+    <h1 class="logo"><span class="l1">BURGIR</span><br /><span class="l2">BURGIR</span></h1>
+    <p class="logo-sub">HAMBURGUESAS · NIVEL 100</p>
+    <div class="pista" aria-hidden="true">
+      <div class="corredor">
+        <span data-sprite="simple" data-px="3"></span>
+        <span data-sprite="enemigo" data-px="4"></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Ventanas del sitio">
+    <button class="tab" role="tab" id="tab-usuario" aria-controls="ventana-usuario" aria-selected="true" data-ventana="usuario">1 · JUGADOR</button>
+    <button class="tab" role="tab" id="tab-menu" aria-controls="ventana-menu" aria-selected="false" data-ventana="menu">2 · MENÚ</button>
+    <button class="tab" role="tab" id="tab-pedidos" aria-controls="ventana-pedidos" aria-selected="false" data-ventana="pedidos">3 · PEDIDOS<span class="badge" id="badge-carrito" hidden>0</span></button>
+  </nav>
+
+  <div class="mensajes" id="mensajes" role="status" aria-live="polite"></div>
+
+  <main>
+    <section class="ventana activa" id="ventana-usuario" role="tabpanel" aria-labelledby="tab-usuario">
+      <h2>CREAR JUGADOR</h2>
+      <p class="ayuda">Regístrate para realizar tus pedidos ó Elige un jugador de la lista.</p>
+
+      <div class="dos-columnas">
+        <form id="form-usuario" novalidate>
+          <h3 id="titulo-form-usuario">NUEVO JUGADOR</h3>
+          <input type="hidden" id="u-cod" />
+
+          <label for="u-nombre">NOMBRE</label>
+          <input id="u-nombre" type="text" maxlength="100" placeholder="Juan Lol" autocomplete="name" required />
+
+          <label for="u-telefono">TELÉFONO (8 DÍGITOS)</label>
+          <input id="u-telefono" type="text" inputmode="numeric" maxlength="8" placeholder="0000-0000" autocomplete="tel" required />
+
+          <label for="u-correo">CORREO</label>
+          <input id="u-correo" type="email" maxlength="150" placeholder="juanlol@correo.com" autocomplete="email" required />
+
+          <label for="u-direccion">DIRECCIÓN</label>
+          <input id="u-direccion" type="text" maxlength="255" placeholder="Ciudad Zona X, Guatemala" autocomplete="street-address" required />
+
+          <div class="fila-botones">
+            <button class="btn" type="submit" id="btn-guardar-usuario">▶ CREAR JUGADOR BURGIR</button>
+            <button class="btn fantasma" type="button" id="btn-cancelar-edicion" hidden>CANCELAR</button>
+          </div>
+        </form>
+
+        <div>
+          <h3>JUGADORES REGISTRADOS</h3>
+          <div class="lista" id="lista-usuarios"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="ventana" id="ventana-menu" role="tabpanel" aria-labelledby="tab-menu">
+      <h2>ELIGE TU ARMA</h2>
+      <p class="ayuda">Agrega lo que se te antoje y confirmas en la ventana de pedidos.</p>
+      <div class="menu-grid" id="grid-menu"></div>
+    </section>
+
+    <section class="ventana" id="ventana-pedidos" role="tabpanel" aria-labelledby="tab-pedidos">
+      <h2>TUS PEDIDOS</h2>
+      <p class="ayuda" id="pedidos-aviso"></p>
+
+      <div class="dos-columnas">
+        <form id="form-pedido" novalidate>
+          <h3>CARRITO</h3>
+          <div id="carrito-items"></div>
+          <div class="total"><span>TOTAL</span><strong id="carrito-total">Q0.00</strong></div>
+
+          <label for="p-direccion">DIRECCIÓN DE ENVÍO</label>
+          <input id="p-direccion" type="text" maxlength="255" placeholder="¿A dónde lo llevamos?" required />
+
+          <div class="fila-botones">
+            <button class="btn rojo" type="submit" id="btn-confirmar">▶ CONFIRMAR PEDIDO</button>
+            <button class="btn fantasma" type="button" id="btn-vaciar">VACIAR</button>
+          </div>
+        </form>
+
+        <div>
+          <h3>HISTORIAL</h3>
+          <div class="lista" id="historial"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="parpadeo">PRESS START</div>
+    <div>© BURGIR <span class="rojo">BURGIR</span> · TODOS LOS DERECHOS RESERVADOS UMG ING SISTEMAS</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
